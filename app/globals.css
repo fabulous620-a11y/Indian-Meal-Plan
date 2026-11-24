@@ -1,0 +1,215 @@
+  :root {
+    --bg: #fff8ef;
+    --card: #ffffff;
+    --ink: #2b2118;
+    --muted: #6b5b4b;
+    --accent: #c2410c;
+    --accent-dark: #9a3412;
+    --line: #ecd9bf;
+    --radius: 20px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 22px;
+    line-height: 1.5;
+    background: var(--bg);
+    color: var(--ink);
+  }
+  header {
+    background: var(--accent);
+    color: #fff;
+    padding: 28px 24px 24px;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 8px; font-size: 40px; }
+  header p { margin: 0; font-size: 22px; opacity: 0.95; }
+
+  nav.days {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 18px 16px;
+    background: #fff;
+    border-bottom: 2px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+  nav.days button {
+    flex: 0 0 auto;
+    font-size: 22px;
+    font-weight: 600;
+    font-family: inherit;
+    padding: 14px 22px;
+    border-radius: 999px;
+    border: 2px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  nav.days button.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  main { padding: 24px 16px 60px; max-width: 1100px; margin: 0 auto; }
+  .day-title { font-size: 34px; margin: 8px 0 18px; }
+  .day-title span { color: var(--muted); font-size: 24px; font-weight: 400; }
+
+  .meals {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 22px;
+  }
+  .meal {
+    background: var(--card);
+    border: 2px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    color: inherit;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .meal:hover, .meal:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(120, 60, 20, 0.18);
+    outline: none;
+  }
+  .pic {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 96px;
+  }
+  .body { padding: 18px 20px 22px; }
+  .type {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    background: #fde7d3;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+  .name { font-size: 27px; font-weight: 700; margin: 0 0 8px; line-height: 1.25; }
+  .desc { font-size: 20px; color: var(--muted); margin: 0 0 14px; }
+  .tap { font-size: 20px; font-weight: 700; color: var(--accent); }
+
+  /* Recipe modal */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(30, 20, 10, 0.55);
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 24px 12px;
+    overflow-y: auto;
+    z-index: 50;
+  }
+  .overlay.open { display: flex; }
+  .sheet {
+    background: #fff;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 760px;
+    overflow: hidden;
+    position: relative;
+  }
+  .sheet .pic { height: 200px; font-size: 110px; }
+  .sheet .content { padding: 26px 28px 34px; }
+  .sheet h2 { font-size: 36px; margin: 0 0 8px; line-height: 1.2; }
+  .sheet .meta { font-size: 20px; color: var(--muted); margin-bottom: 18px; }
+  .sheet h3 {
+    font-size: 26px;
+    margin: 26px 0 10px;
+    color: var(--accent-dark);
+    border-bottom: 2px solid var(--line);
+    padding-bottom: 6px;
+  }
+  .sheet ul { padding-left: 0; list-style: none; margin: 0; }
+  .sheet ul li {
+    font-size: 22px;
+    padding: 8px 0 8px 36px;
+    position: relative;
+    border-bottom: 1px dashed var(--line);
+  }
+  .sheet ul li::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 19px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .sheet ol { padding-left: 0; margin: 0; counter-reset: step; list-style: none; }
+  .sheet ol li {
+    font-size: 22px;
+    padding: 12px 0 12px 56px;
+    position: relative;
+    border-bottom: 1px dashed var(--line);
+  }
+  .sheet ol li::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.95);
+    font-size: 32px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 2;
+  }
+  .note {
+    background: #fff4e6;
+    border-left: 6px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 20px;
+    margin-top: 22px;
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 19px;
+    padding: 0 16px 40px;
+  }
+  @media (max-width: 480px) {
+    body { font-size: 21px; }
+    header h1 { font-size: 34px; }
+    .name { font-size: 26px; }
+  }
